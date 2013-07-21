@@ -43,8 +43,17 @@ function WriteDiscussion($Discussion, &$Sender, &$Session, $Alt2) {
    <div class="ItemContent Discussion">
       <?php echo Anchor($DiscussionName, $DiscussionUrl, 'Title'); ?>
       <?php $Sender->FireEvent('AfterDiscussionTitle'); ?>
-	<?php echo "test";?>
-	<?php print_r($DiscussionName, $DiscussionUrl);?>
+      <?php 
+		$discussionBody;
+		if(strlen($Discussion->Body)<=300)
+	   	    $discussionBody = $Discussion->Body;
+		else
+        {
+			$discussionBody = substr($Discussion->Body,300);
+            $discussionBody = $discussionBody.'...';
+		}
+        print_r($discussionBody);
+	?>
       <div class="Meta">
          <?php $Sender->FireEvent('BeforeDiscussionMeta'); ?>
          <?php if ($Discussion->Announce == '1') { ?>

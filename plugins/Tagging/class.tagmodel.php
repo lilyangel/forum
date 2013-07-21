@@ -84,10 +84,12 @@ class TagModel extends Gdn_Model {
    }
 
    public static function SplitTags($TagsString) {
-      $Tags = preg_split('`[\s]`', $TagsString);
+      //$Tags = preg_split('`[\s]`', $TagsString);
+      //lily add '*' to split tags
+      $Tags = preg_split('`[\*]`', $TagsString);
       // Trim each tag.
       foreach ($Tags as $Index => $Tag) {
-         $Tag = trim($Tag);
+      //   $Tag = trim($Tag);
          if (!$Tag)
             unset($Tags[$Index]);
          else

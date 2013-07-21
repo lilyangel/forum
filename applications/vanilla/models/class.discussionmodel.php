@@ -830,6 +830,7 @@ class DiscussionModel extends VanillaModel {
 		//	Prep and fire event
 		$this->EventArguments['FormPostValues'] = &$FormPostValues;
 		$this->EventArguments['DiscussionID'] = $DiscussionID;
+        //throw new Exception(GetValue('Tags From Post'. $FormPostValues.'\n'));
 		$this->FireEvent('BeforeSaveDiscussion');
          
       // Validate the form posted values

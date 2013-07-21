@@ -247,11 +247,11 @@ class TaggingPlugin extends Gdn_Plugin {
          $Sender->Validation->AddValidationResult('Tags', 'You must specify at least one tag.');
       } else {
          $Tags = TagModel::SplitTags($TagsString);
-         if (!TagModel::ValidateTags($Tags)) {
-            $Sender->Validation->AddValidationResult('Tags', '@'.T('ValidateTag', 'Tags cannot contain spaces.'));
-         } elseif (count($Tags) > $NumTagsMax) {
-            $Sender->Validation->AddValidationResult('Tags', '@'.sprintf(T('You can only specify up to %s tags.'), $NumTagsMax));
-         }
+//         if (!TagModel::ValidateTags($Tags)) {
+//            $Sender->Validation->AddValidationResult('Tags', '@'.T('ValidateTag', 'Tags cannot contain spaces.'));
+//         } elseif (count($Tags) > $NumTagsMax) {
+//            $Sender->Validation->AddValidationResult('Tags', '@'.sprintf(T('You can only specify up to %s tags.'), $NumTagsMax));
+//         }
       }
    }
 

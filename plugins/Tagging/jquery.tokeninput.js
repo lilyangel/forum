@@ -158,7 +158,6 @@ $.TokenList = function (input, settings) {
 
                 case KEY.BACKSPACE:
                     previous_token = input_token.prev();
-
                     if(!$(this).val().length) {
                         if(selected_token) {
                             delete_token($(selected_token));
@@ -175,10 +174,10 @@ $.TokenList = function (input, settings) {
                     }
                     break;
 
-                case KEY.TAB:
+                //case KEY.TAB:
                 case KEY.RETURN:
                 case KEY.COMMA:
-                case KEY.SPACE:
+                case KEY.TAB:
                   if (selected_dropdown_item) {
                     add_token($(selected_dropdown_item));
                   } else {
@@ -280,7 +279,8 @@ $.TokenList = function (input, settings) {
 
     // Pre-populate list if items exist
     function init_list () {
-        li_data = hidden_input.val().split(' '); // settings.prePopulate;
+        //lily add '*' to split tags
+        li_data = hidden_input.val().split('*'); // settings.prePopulate;
         if(li_data && li_data.length) {
             for(var i in li_data) {
                 if (li_data[i].trim() != '') {
@@ -370,7 +370,8 @@ $.TokenList = function (input, settings) {
         hide_dropdown();
 
         // Save this token id
-        hidden_input.val(hidden_input.val().trim() + ' ' + li_data.name);
+        //lily add '*' to split tags
+        hidden_input.val(hidden_input.val().trim() + '*' + li_data.name);
         
         token_count++;
         
@@ -395,7 +396,8 @@ $.TokenList = function (input, settings) {
         hide_dropdown();
 
         // Save this token id
-        hidden_input.val(hidden_input.val().trim() + ' ' + name);
+        //lily add '*' to split tags
+        hidden_input.val(hidden_input.val().trim() + '*' + name);
         
         token_count++;
         
@@ -449,7 +451,6 @@ $.TokenList = function (input, settings) {
     function delete_token (token) {
         // Remove the id from the saved list
         var token_data = $.data(token.get(0), "tokeninput");
-
         // Delete the token
         token.remove();
         selected_token = null;
@@ -459,13 +460,15 @@ $.TokenList = function (input, settings) {
 
         // Delete this token's id from hidden input
         var str = hidden_input.val()
-        var arr = str.split(' ');
+        //lily add '*' to split tags
+        var arr = str.split('*');
         var newstr = '';
         token_count = 0;
         for (var i in arr) {
             if (arr[i] != token_data.name) {
                 token_count++;
-                newstr += arr[i] + ' ';
+                //lily add '*' to split tags
+                newstr += arr[i] + '*';
             }
         }
         hidden_input.val(newstr.trim());
