@@ -26,15 +26,29 @@
                             $ProfileSlug = $Session->UserID.'/'.urlencode($Session->User->Name);
                         $this->Menu->AddLink('User', $Name, '/profile/'.$ProfileSlug, array('Garden.SignIn.Allow'), array('class' => 'UserNotifications'));
                       //  print_r($this->Menu->ToString());
-			            $this->Menu->AddLink('Profile', 'Patients', $ProfileSlug.'/patients', FALSE, array('class' => 'UserPatients'));
-				        $this->Menu->AddLink('SignOut', T('Sign Out'), SignOutUrl(), FALSE, array('class' => 'NonTab SignOut'));
+			          //
+                        //$this->Menu->AddLink('Profile', 'Patients', $ProfileSlug.'/patients', FALSE, array('class' => 'UserPatients'));
+                        $menuString = $this->Menu->ToString();
+                        $menuString = substr($menuString, 0, strlen($menuString)-5);
+                        $patientForm = "<li><form name='subPatient' action='http://192.168.16.133/profile/patients.php' method='post'>
+                            <input type='hidden' name='user' value="."'".$ProfileSlug."'"."/>
+                            <a href='javascript:document.subPatient.submit();'>Patients</a>
+                            </form></li>";
+                        $menuString = $menuString . $patientForm;
+                        $this->Menu->AddLink('SignOut', T('Sign Out'), SignOutUrl(), FALSE, array('class' => 'NonTab SignOut'));
+                        $signOutString = $this->Menu->ToString();
+                        $menuHeadLen = strlen("<ul id='Menu'>");
+                        $menuTailLen = strlen("</ul>");
+                        $signOutString = substr($signOutString, $menuHeadLen, strlen($signOutString)-$menuHeadLen - $menuTailLen);
+                        $menuString = $menuString .$signOutString. "</ul>";
+                        echo $menuString;
 			        } else {
 				        $Attribs = array();
 			            if (SignInPopup() && strpos(Gdn::Request()->Url(), 'entry') === FALSE)
 					        $Attribs['class'] = 'SignInPopup';
 				        $this->Menu->AddLink('Entry', T('Sign In'), SignInUrl($this->SelfUrl), FALSE, array('class' => 'NonTab SignIn'), $Attribs);
+			            echo $this->Menu->ToString();
 			        }
-			        echo $this->Menu->ToString();
 				}
 				?>
             <div class="Search"><?php

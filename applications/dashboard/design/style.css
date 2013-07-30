@@ -726,8 +726,8 @@ body #Head h1 {
 .PanelInfo li {
    background: #e3f4ff;
    border-bottom: 1px solid #abdafb;
-   padding: 2px 4px;
-   text-align: right;
+   padding: 5px 4px;
+   text-align: left;
 }
 .PanelInfo li.Heading {
    text-align: left;
@@ -744,7 +744,6 @@ body #Head h1 {
    font-weight: normal;
 }
 .PanelInfo li a {
-   float: left;
 }
 .Moderators ul.PanelInfo li {
 	text-align: left;
@@ -3114,4 +3113,9 @@ body.embed .Connect h2 {
    vertical-align: text-bottom;
    height: 24px;
    width: 24px;
+}
+
+.favoriteTag{
+   margin: 1px;
+    float: right;
 }
